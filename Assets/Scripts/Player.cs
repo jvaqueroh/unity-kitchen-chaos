@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class Player : MonoBehaviour {
+    private void Update() {
+        Vector2 inputVector = new Vector2();
+        if(Input.GetKey(KeyCode.W)) {
+            inputVector.y = +1;
+        }
+        if (Input.GetKey(KeyCode.S)) {
+            inputVector.y = -1;
+        }
+        if (Input.GetKey(KeyCode.A)) {
+            inputVector.x = -1;
+        }
+        if (Input.GetKey(KeyCode.D)) {
+            inputVector.x = +1;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        inputVector = inputVector.normalized;
+
+        Debug.Log(inputVector);
     }
 }
