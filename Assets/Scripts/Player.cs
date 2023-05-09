@@ -4,25 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     [SerializeField] float moveSpeed = 7.0f;
+    [SerializeField] PlayerInput playerInput;
 
     public bool IsWalking { get; private set; }
 
     private void Update() {
-        Vector2 inputVector = new Vector2();
-        if(Input.GetKey(KeyCode.W)) {
-            inputVector.y = +1;
-        }
-        if (Input.GetKey(KeyCode.S)) {
-            inputVector.y = -1;
-        }
-        if (Input.GetKey(KeyCode.A)) {
-            inputVector.x = -1;
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            inputVector.x = +1;
-        }
-
-        inputVector = inputVector.normalized;
+        Vector2 inputVector = playerInput.GetInputVector2Normalized();
         Vector3 moveDirection = new Vector3(inputVector.x, 0.0f, inputVector.y);
         IsWalking = !moveDirection.Equals(Vector3.zero);
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
